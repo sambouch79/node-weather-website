@@ -1,4 +1,3 @@
-console.log('the js file is loeded!!!')
 
 const weatherSearch= document.querySelector('form')
 const search=document.querySelector('input')
@@ -10,7 +9,7 @@ const messageError=document.querySelector('#messageError')
 weatherSearch.addEventListener('submit',(e)=>{
     e.preventDefault()
     const loc=search.value
-   fetch('http://localhost:3000/weather?address='+loc ).then((response)=>{
+   fetch('/weather?address='+loc ).then((response)=>{
    response.json().then((data)=>{
        if(data.error){
            //console.log(data.error)

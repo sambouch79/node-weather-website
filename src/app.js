@@ -7,6 +7,7 @@ const geocod=require('./utils/geocod')
 //console.log(path.join(__dirname ,'../public'))
 
 const app=express()
+const port=process.env.PORT
 //define paths for expressconfig
 const  publicDirPath = path.join(__dirname ,'../public')
 const viewsPath=path.join(__dirname,'../templates/views')
@@ -103,6 +104,6 @@ app.get('/*',(req,res)=>{
         name:'sam'
     })
 })
-app.listen(3000,()=>{
-    console.log('server is runing on port 3000')
+app.listen(port,()=>{
+    console.log('server is runing on port '+ port)
 })
