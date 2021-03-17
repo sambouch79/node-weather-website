@@ -7,7 +7,7 @@ const geocod=require('./utils/geocod')
 //console.log(path.join(__dirname ,'../public'))
 
 const app=express()
-const port=process.env.PORT
+const port=process.env.PORT||3000
 //define paths for expressconfig
 const  publicDirPath = path.join(__dirname ,'../public')
 const viewsPath=path.join(__dirname,'../templates/views')
@@ -81,8 +81,13 @@ app.get('/weather',(req,res)=>{
             description:forecastdata.description[0],
             temperature:forecastdata.temperature,
             feelsLike:forecastdata.feellike,
-            adress:address,
             localisation:localisation,
+            weather_icons:forecastdata.weather_icons,
+            precip:forecastdata.precip,
+            wind_speed:forecastdata.wind_speed,
+            humidity:forecastdata.humidity,
+            pressure:forecastdata.pressure,
+            visibility:forecastdata.visibility
         })
      })
       

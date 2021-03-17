@@ -2,31 +2,52 @@
 const weatherSearch= document.querySelector('form')
 const search=document.querySelector('input')
 const messageWeather=document.querySelector('#messageWeater')
+const messageWind=document.querySelector('#wind')
+const messageHumidity=document.querySelector('#humidity')
+const messagePressure=document.querySelector('#pressure')
+const messageVisibility=document.querySelector('#visibility')
 const messageLoc=document.querySelector('#messageLoc')
 const messageError=document.querySelector('#messageError')
-
+const iconWeather=document.querySelector('.iconWeather')
 
 weatherSearch.addEventListener('submit',(e)=>{
     e.preventDefault()
     const loc=search.value
-   fetch('/weather?address='+loc ).then((response)=>{
+    
+   fetch('http://localhost:3000/weather?address='+loc).then((response)=>{
    response.json().then((data)=>{
+   
        if(data.error){
            //console.log(data.error)
            messageError.textContent=data.error
            messageWeather.textContent=''
            messageLoc.textContent=''
+           messageWind.textContent=''
+           messageHumidity.textContent=''
+           messagePressure.textContent=''
+           messageVisibility.textContent=''
+           iconWeather.style.display="none"
+           //document.querySelector('.iconWeather').style.display="none"
        }else{
-        //console.log(data)
-        messageWeather.textContent=data.description +' ,temperature is '+data.temperature+' and feels like '+data.feelsLike
-
+       
+        const messageWeath= 'Temperature is '+data.temperature+' °C and feels like '+data.feelsLike+' °C .'
+       
+        messageWeather.textContent=data.description +'\n'+messageWeath;
+        messageWind.textContent='Wind speed :'+data.wind_speed
+        messageHumidity.textContent='Humidity :'+data.humidity
+        messagePressure.textContent='Pressure :'+data.pressure
+        messageVisibility.textContent='Visibility :'+data.visibility
         messageLoc.textContent=data.localisation
-
+        iconWeather.src=data.weather_icons
         messageError.textContent=''
        }
    }) 
 })
 })
+/* var img = document.querySelector('.iconWeather');
+img.onerror = function () { 
+    this.style.display = "none"; */
+
 //background animation
 const particules=[];
 function setup(){
